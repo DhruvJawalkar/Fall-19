@@ -25,12 +25,13 @@ e2 = Mul (Add (Lit 7) (Lit 6)) (Lit 5)
 
 -- | The expresssion: 3 * 2 + 5 * 4
 e3 :: Expr
-e3 = undefined
+e3 = Add (Mul (Lit 3) (Lit 2)) (Mul (Lit 5) (Lit 4))
 
 
 -- | The expression: 8 + 7 * 9 + 6
 e4 :: Expr
-e4 = undefined
+e4 = Add (Add (Lit 8) (Mul (Lit 7) (Lit 9))) (Lit 6)
+-- OR: e4 = Add (Lit 8) (Add (Mul (Lit 7) (Lit 9)) (Lit 6))
 
 
 -- | The leftmost literal in an expression.
@@ -45,7 +46,9 @@ e4 = undefined
 --   7
 --
 leftLit :: Expr -> Int
-leftLit = undefined
+leftLit (Lit i)   = i
+leftLit (Add l _) = leftLit l
+leftLit (Mul l _) = leftLit l
 
 
 -- | The rightmost literal in an expression.
@@ -60,7 +63,9 @@ leftLit = undefined
 --   6
 --
 rightLit :: Expr -> Int
-rightLit = undefined
+rightLit (Lit i)   = i
+rightLit (Add _ r) = rightLit r
+rightLit (Mul _ r) = rightLit r
 
 
 -- | Get the maximum literal value in an expression.
@@ -81,7 +86,9 @@ rightLit = undefined
 --   9
 --
 maxLit :: Expr -> Int
-maxLit = undefined
+maxLit (Lit i)   = i
+maxLit (Add l r) = max (maxLit l) (maxLit r)
+maxLit (Mul l r) = max (maxLit l) (maxLit r)
 
 
 -- | The integer result of evaluating an expression.
@@ -102,4 +109,6 @@ maxLit = undefined
 --   77
 --
 eval :: Expr -> Int
-eval = undefined
+eval (Lit i)   = i
+eval (Add l r) = eval l + eval r
+eval (Mul l r) = eval l * eval r
