@@ -85,13 +85,13 @@ ex6 = Just . bit
 
 ex7 = Leaf (Leaf one)
 
--- ex8 = bit . even
+ex8 = bit . even
 
 -- ex9 = even . gt one
 
--- ex10 = gt one . bit
+ex10 = gt one . bit
 
--- ex11 = Node True (Leaf one) . Leaf
+ex11 = Node True (Leaf one) . Leaf
 
 -- ex12 = flip Just
 
