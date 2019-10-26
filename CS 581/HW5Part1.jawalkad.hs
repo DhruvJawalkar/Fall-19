@@ -17,7 +17,7 @@ data Expr
 
 data Stmt
   = Set Reg Expr
-  | if Expr then Prog else Prog end
+  | Conditional Expr Prog Prog 
 
 type Prog = [ Stmt ]
 given_program = [(Set A (LitI 3))]
